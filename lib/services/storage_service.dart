@@ -1,4 +1,4 @@
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:shared_preferences/shared_preferences.dart' show SharedPreferences;
 
 /**
  * Pattern Singleton:
@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class StorageService {
   //===== Singleton ==========
   /// Instance Unique (privee)
+  StorageService._internal();
   static StorageService? _instance;
 
   /// Getter pour acceder a l'instance
