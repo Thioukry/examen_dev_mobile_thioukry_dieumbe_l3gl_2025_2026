@@ -1,3 +1,4 @@
+
 enum TaskStatus { todo , inProgress,done}
 enum TaskPriority {low , meduim,high}
 
@@ -6,6 +7,7 @@ class Task {
   final String title ;
   final TaskStatus status ;
   final TaskPriority priority;
+
 
    Task({
     required this.id,

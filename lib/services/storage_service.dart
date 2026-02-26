@@ -1,5 +1,5 @@
 import 'package:shared_preferences/shared_preferences.dart' show SharedPreferences;
-
+import '../models/user.dart';
 /**
  * Pattern Singleton:
  * Pour avoir une seule instance
@@ -7,6 +7,10 @@ import 'package:shared_preferences/shared_preferences.dart' show SharedPreferenc
 class StorageService {
   //===== Singleton ==========
   /// Instance Unique (privee)
+  /// {
+  ///
+  StorageService();
+  //StorageService(this._box);
   StorageService._internal();
   static StorageService? _instance;
 
@@ -15,6 +19,20 @@ class StorageService {
     _instance ??= StorageService._();
     return _instance!;
   }
+
+    Future<void> saveUser(User user) async{}
+
+    Future<void> saveCurrentUser( User user) async{}
+
+
+    Future<void> removeCurrentUser(User user) async{}
+
+   Future<List<User>> getAllUsers() async{
+    return[];
+   }
+
+
+
 
   /// Constructeur prive
   StorageService._();
@@ -42,6 +60,8 @@ class StorageService {
   // ======== Cles de Stockage =========
   static const String _keyOnboardingConmplete = 'onboarding_complete';
 
+  var _box;
+
 
   bool get isOnboardingComplete {
     return _prefs.getBool(_keyOnboardingConmplete) ?? false;
@@ -51,4 +71,10 @@ class StorageService {
     await _prefs.setBool(_keyOnboardingConmplete, value);
   }
 
-}
+  Future<User?> getCurrentuser() async {}
+
+
+
+
+  }
+
