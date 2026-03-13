@@ -13,6 +13,8 @@ class Task {
   final TaskPriority priority;
   final DateTime? dueDate;
 
+  var createdAt;
+
   Task({
     required this.id,
     required this.projectId,
@@ -20,7 +22,7 @@ class Task {
     this.description,
     this.status = TaskStatus.todo,
     this.priority = TaskPriority.medium,
-    this.dueDate,
+    this.dueDate, required createdAt,
   });
 
   // Méthode pour copier une tâche en modifiant certains champs
@@ -38,7 +40,7 @@ class Task {
       description: description ?? this.description,
       status: status ?? this.status,
       priority: priority ?? this.priority,
-      dueDate: dueDate ?? this.dueDate,
+      dueDate: dueDate ?? this.dueDate, createdAt: null,
     );
   }
 
@@ -65,6 +67,8 @@ class Task {
       status: TaskStatus.values[map['status'] ?? 0],
       priority: TaskPriority.values[map['priority'] ?? 1],
       dueDate: map['dueDate'] != null ? DateTime.parse(map['dueDate']) : null,
+      createdAt: null,
     );
   }
+
 }

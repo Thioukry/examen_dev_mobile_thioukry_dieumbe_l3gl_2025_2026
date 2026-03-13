@@ -1,14 +1,19 @@
 import 'package:flutter/material.dart';
 
 class ProfileTab extends StatelessWidget {
-  const ProfileTab({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: Text(
-        "Profile",
-        style: TextStyle(fontSize: 24),
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          CircleAvatar(radius: 50, child: Icon(Icons.person, size: 50)),
+          SizedBox(height: 10),
+          Text("Utilisateur Sunu Task", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+          Text("dieumbe@email.com"),
+          SizedBox(height: 20),
+          ElevatedButton(onPressed: () {}, child: Text("Déconnexion")),
+        ],
       ),
     );
   }

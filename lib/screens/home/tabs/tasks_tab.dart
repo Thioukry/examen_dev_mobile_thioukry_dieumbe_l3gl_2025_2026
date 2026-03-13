@@ -1,15 +1,18 @@
+
 import 'package:flutter/material.dart';
 
 class TasksTab extends StatelessWidget {
-  const TasksTab({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Text(
-        "Tasks",
-        style: TextStyle(fontSize: 24),
-      ),
+    return ListView.builder(
+      itemCount: 5,
+      itemBuilder: (context, index) {
+        return CheckboxListTile(
+          title: Text("Tâche numéro ${index + 1}"),
+          value: index % 2 == 0, // Juste pour l'exemple
+          onChanged: (val) {},
+        );
+      },
     );
   }
 }

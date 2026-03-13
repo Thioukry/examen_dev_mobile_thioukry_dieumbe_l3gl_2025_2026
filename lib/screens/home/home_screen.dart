@@ -14,14 +14,12 @@ class HomeScreen extends StatefulWidget {
 }
 class _HomeScreenState extends State<HomeScreen>{
   @override
-
-  // Pour la liste des pages pour l'indexedStack
-  final List<Widget> _tabs = [
-    const DashboardTab(),
-    const ProjectsTab(),
-    const TasksTab(),
-    const ProfileTab(),
-  ];
+final List<Widget> _pages = [
+  DashboardTab(),
+    ProjectsTab(),
+    TasksTab(),
+    ProfileTab(),
+    ];
   int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
@@ -35,6 +33,7 @@ class _HomeScreenState extends State<HomeScreen>{
          onPressed: () {},
           // Bonus : Notifications
         ),
+
         ],
         ),
 
@@ -42,10 +41,19 @@ class _HomeScreenState extends State<HomeScreen>{
       //drawer: const _HomeDrawer(),
 
       // IndexedStack permet de garder les onglets "en vie" en mémoire
-      body: IndexedStack(
-      index: _currentIndex,
-      children: _tabs,
-      ),
+      body: _pages[_currentIndex],
+      bottomNavigationBar: BottomNavigationBar(currentIndex: _currentIndex,
+          onTap: (int index) {
+            setState(() {
+              _currentIndex = index;
+            });
+          },
+        items: [ BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: 'Dashboard'),
+          BottomNavigationBarItem(icon: Icon(Icons.folder), label: 'Projets'),
+          BottomNavigationBarItem(icon: Icon(Icons.list_alt), label: 'Tâches'),
+          BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profil'),
+        ],),
+
 
       // Bouton flottant pour créer un projet ou une tâche
       floatingActionButton: _currentIndex < 2
@@ -55,17 +63,7 @@ class _HomeScreenState extends State<HomeScreen>{
       )
           : null,
 
-      bottomNavigationBar: BottomNavigationBar(
-      currentIndex: _currentIndex,
-      onTap: (index) => setState(() => _currentIndex = index),
-      type: BottomNavigationBarType.fixed, // Pour afficher plus de 3 items
-      items: const [
-      BottomNavigationBarItem(icon: Icon(Icons.dashboard), label: 'Dashboard'),
-      BottomNavigationBarItem(icon: Icon(Icons.folder), label: 'Projets'),
-      BottomNavigationBarItem(icon: Icon(Icons.list_alt), label: 'Tâches'),
-      BottomNavigationBarItem(icon: Icon(Icons.person), label: 'Profil'),
-      ],
-      ),
+
       );
       }
 

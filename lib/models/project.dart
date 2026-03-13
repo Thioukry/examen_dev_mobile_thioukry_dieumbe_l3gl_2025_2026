@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 
 class Project {
   final String id;
-  final String userId;      // ID de l'utilisateur qui a créé le projet
+  final String userId; // ID de l'utilisateur qui a créé le projet
   final String name;
   final String? description;
-  final Color color;        // Couleur pour l'icône ou la carte
+  final Color color; // Couleur pour l'icône ou la carte
   final DateTime createdAt;
+
+  //final String colorHex;
+
 
   Project({
     required this.id,
@@ -42,4 +45,6 @@ class Project {
       createdAt: DateTime.parse(map['createdAt']),
     );
   }
+
+
 }
