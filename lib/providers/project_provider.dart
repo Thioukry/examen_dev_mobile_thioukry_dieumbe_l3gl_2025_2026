@@ -42,7 +42,7 @@ import '../models/user.dart';
   }
 
   // 2. Créer un nouveau projet
-  Future<void> createProject(ProjectDetailScreen project) async {
+  Future<void> createProject(project) async {
   _isLoading = true;
   notifyListeners();
 

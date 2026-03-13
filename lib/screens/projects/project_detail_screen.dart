@@ -40,6 +40,7 @@ class _ProjectDetailScreenState extends State<ProjectDetailScreen> {
         actions: [
           IconButton(icon: const Icon(Icons.edit), onPressed: () => _editProject(context, project)),
           IconButton(icon: const Icon(Icons.delete), onPressed: () => _confirmDelete(context, project)),
+
         ],
       ),
       body: Column(

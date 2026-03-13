@@ -1,26 +1,31 @@
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sunu_task/models/project.dart';
+import '../../../providers/project_provider.dart';
 
 class ProjectsTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      padding: EdgeInsets.all(16.0),
-      children: [
-        ListTile(
-          leading: Icon(Icons.folder, color: Colors.blue),
-          title: Text("Développement Mobile"),
-          subtitle: Text("Flutter App - 80% terminé"),
-          trailing: Icon(Icons.arrow_forward_ios, size: 16),
-        ),
-        Divider(),
-        ListTile(
-          leading: Icon(Icons.folder, color: Colors.orange),
-          title: Text("Design UI/UX"),
-          subtitle: Text("Maquettes Figma"),
-          trailing: Icon(Icons.arrow_forward_ios, size: 16),
-        ),
-      ],
+    // On écoute le ProjectProvider
+    return Consumer<ProjectProvider>(
+      builder: (context, projectProvider, child) {
+        final projects = projectProvider.projects;
+
+        return Visibility(
+          visible: projects.isNotEmpty,
+          replacement: const Center(child: Text("Aucun projet. Cliquez sur +")), // Si vide
+          child: ListView.builder(
+            itemCount: projects.length,
+            itemBuilder: (context, index) {
+              return ListTile(
+                title: Text(projects[index].name),
+                subtitle: Text("Description: ${projects[index].description}"),
+              );
+            },
+          ),
+        );
+      },
     );
   }
 }

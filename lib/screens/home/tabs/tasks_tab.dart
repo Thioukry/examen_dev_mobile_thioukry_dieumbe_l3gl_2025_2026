@@ -1,5 +1,10 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:sunu_task/models/project.dart';
+import '../../../providers/project_provider.dart';
+
 
 class TasksTab extends StatelessWidget {
   @override
