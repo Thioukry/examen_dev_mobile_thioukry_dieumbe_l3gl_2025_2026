@@ -15,7 +15,7 @@ class User {
 
  final String? avatar;
 
- final DateTime createdAt;
+ final String createdAt;
 
  /// Constructeur
  User({
@@ -24,8 +24,8 @@ class User {
    required this.email,
    required this.password,
    this.avatar,
-   DateTime? createdAt,
-}) : createdAt = createdAt ?? DateTime.now();
+   required this.createdAt,
+}) ;
 
  /**
   * Crée une copie de l'utilisateur avec des champs modifies
@@ -37,7 +37,7 @@ class User {
    String? email,
    String? password,
    String? avatar,
-   DateTime? createdAt,
+   String? createdAt,
 }) {
    return User(
        id: id ?? this.id,
@@ -74,7 +74,7 @@ class User {
        email: map['email'] as String,
        password: map['password'] as String,
        avatar: map['avatar'] as String,
-       createdAt: DateTime.parse(map['createdAt'] as String)
+       createdAt: map['createdAt'] as String,
    );
  }
 

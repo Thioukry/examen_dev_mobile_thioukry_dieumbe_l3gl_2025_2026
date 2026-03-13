@@ -77,7 +77,7 @@ class AuthProvider extends ChangeNotifier {
         name: name,
         email: email,
         password: password,
-        createdAt: DateTime.now(),
+         createdAt: DateTime.now().toIso8601String(),
       );
 
       // Sauvegarde double : Liste globale + Session actuelle

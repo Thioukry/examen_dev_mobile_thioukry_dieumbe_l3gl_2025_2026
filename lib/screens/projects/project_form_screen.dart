@@ -38,7 +38,7 @@ class _ProjectFormScreenState extends State<ProjectFormScreen> {
   }
   void save() {
     final provider = Provider.of<ProjectProvider>(context, listen: false);
-
+   String message = "";
     if (widget.project == null) {
       // CRÉER
       provider.createProject(Project(
@@ -55,6 +55,14 @@ class _ProjectFormScreenState extends State<ProjectFormScreen> {
       );
       provider.updateProject(updatedProject);
     }
+    ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text(message),
+          backgroundColor: Colors.green,
+          duration: const
+          Duration(seconds: 2),
+        ),
+    );
     Navigator.pop(context);
   }
 

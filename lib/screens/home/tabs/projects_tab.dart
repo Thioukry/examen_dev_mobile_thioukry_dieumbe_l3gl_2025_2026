@@ -44,12 +44,34 @@ class ProjectsTab extends StatelessWidget {
                       icon: const Icon(Icons.delete,
                           color: Colors.red),
                       onPressed: () {
-                        projectProvider.deleteProject(projects[index].id);
-                      },
-                    ),
-                  ],
+              showDialog(
+              context: context,
+              builder: (context) =>
+              AlertDialog(
+              title: const
+              Text("Supprimer ?"),
+              content: const Text("Voulez-vous vraiment supprimer ce projet ?"),
+              actions: [
+              TextButton(onPressed: ()=>
+              Navigator.pop(context),
+              child: const
+              Text("Non")),
+              TextButton(
+              onPressed:(){
+              projectProvider.deleteProject(projects[index].id);
+              ScaffoldMessenger.of(context).showSnackBar(
+              const
+              SnackBar(content: Text("Projet supprime"),backgroundColor: Colors.red),
+              );
+              }, child: const Text("Oui",style: TextStyle(color: Colors.red)),
+              ),
+              ],
+              ),
+              );
+              },
+              ),
+              ],
                 ),
-
 
               );
             },
