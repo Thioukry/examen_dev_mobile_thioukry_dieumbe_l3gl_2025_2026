@@ -6,40 +6,34 @@ import '../../../providers/project_provider.dart';
 
 
 class DashboardTab extends StatelessWidget {
+  const DashboardTab({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.all(16.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text("Tableau de bord", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
-          SizedBox(height: 20),
-          Row(
-            children: [
-              _buildStatCard("Tâches", "12", Colors.blue),
-              _buildStatCard("Projets", "4", Colors.orange),
-            ],
-          ),
-        ],
-      ),
-    );
+  return Consumer<ProjectProvider>(
+  builder: (context, provider, child) {
+  return Center(
+  child: Column(
+  mainAxisAlignment: MainAxisAlignment.center,
+  children: [
+  const Text("Tableau de bord", style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+  const SizedBox(height: 20),
+  Card(
+  color: Colors.blue.shade50,
+  child: Padding(
+  padding: const EdgeInsets.all(30),
+  child: Column(
+  children: [
+  Text("${provider.projects.length}", style: const TextStyle(fontSize: 48, fontWeight: FontWeight.bold, color: Colors.blue)),
+  const Text("Projets actifs"),
+  ],
+  ),
+  ),
+  ),
+  ],
+  ),
+  );
+  },
+  );
   }
-
-  Widget _buildStatCard(String title, String count, Color color) {
-    return Expanded(
-      child: Card(
-        color: color,
-        child: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            children: [
-              Text(title, style: TextStyle(color: Colors.white)),
-              Text(count, style: TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold)),
-            ],
-          ),
-        ),
-      ),
-    );
   }
-}

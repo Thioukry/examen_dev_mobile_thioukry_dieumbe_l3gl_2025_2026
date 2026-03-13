@@ -19,8 +19,13 @@ class ProjectsTab extends StatelessWidget {
             itemCount: projects.length,
             itemBuilder: (context, index) {
               return ListTile(
+                leading: const Icon(Icons.folder,color: Colors.blue),
                 title: Text(projects[index].name),
                 subtitle: Text("Description: ${projects[index].description}"),
+                trailing: IconButton(icon: const Icon(Icons.delete,color: Colors.red),
+                onPressed: (){
+                  Provider.of<ProjectProvider>(context,listen: false).deleteProject(projects[index].id);
+                },),
               );
             },
           ),
