@@ -3,7 +3,13 @@ import '../models/task.dart';
 import '../services/storage_service.dart';
 
 class TaskProvider extends ChangeNotifier {
-  List<Task> _tasks = [];
+  List<Task> _tasks = [
+    Task(id: '1', title:'Finaliser le CRUD Projets', isCompleted: true, projectId: '', createdAt: null),
+    Task(id: '2', title:'Tester la navigation', isCompleted: false, projectId: '', createdAt: null),
+    Task(id: '1', title:'Faire le Git Push final', isCompleted: false, projectId: '', createdAt: null),
+  ];
+
+ // List<Task> get tasks => _tasks;
   TaskStatus? _statusFilter;
   TaskPriority? _priorityFilter;
   bool _isLoading = false;
@@ -11,6 +17,7 @@ class TaskProvider extends ChangeNotifier {
   // --- GETTERS ---
 
   bool get isLoading => _isLoading;
+
 
   // Retourne les tâches filtrées et triées selon les exigences
   List<Task> get tasks {
@@ -116,4 +123,12 @@ class TaskProvider extends ChangeNotifier {
     _priorityFilter = null;
     notifyListeners();
   }
+  void toggleTaskStatus(String id){
+    final index = _tasks.indexWhere((t)=>t.id == id);
+    if(index != -1){
+      _tasks[index].isCompleted = ! _tasks[index].isCompleted;
+      notifyListeners();
+    }
+  }
 }
+

@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sunu_task/models/project.dart';
+import 'package:sunu_task/screens/projects/project_form_screen.dart';
 import '../../../providers/project_provider.dart';
 
 class ProjectsTab extends StatelessWidget {
@@ -14,18 +15,42 @@ class ProjectsTab extends StatelessWidget {
 
         return Visibility(
           visible: projects.isNotEmpty,
-          replacement: const Center(child: Text("Aucun projet. Cliquez sur +")), // Si vide
+          replacement: const Center(child: Text("Aucun projet. Cliquez sur +")),
+          // Si vide
           child: ListView.builder(
             itemCount: projects.length,
             itemBuilder: (context, index) {
               return ListTile(
-                leading: const Icon(Icons.folder,color: Colors.blue),
+                leading: const Icon(Icons.folder, color: Colors.blue),
                 title: Text(projects[index].name),
                 subtitle: Text("Description: ${projects[index].description}"),
-                trailing: IconButton(icon: const Icon(Icons.delete,color: Colors.red),
-                onPressed: (){
-                  Provider.of<ProjectProvider>(context,listen: false).deleteProject(projects[index].id);
-                },),
+                trailing: Row(mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.edit,
+                          color: Colors.orange),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                ProjectFormScreen(project:
+                                projects[index]),
+                          ),
+                        );
+                      },
+                    ),
+                    IconButton(
+                      icon: const Icon(Icons.delete,
+                          color: Colors.red),
+                      onPressed: () {
+                        projectProvider.deleteProject(projects[index].id);
+                      },
+                    ),
+                  ],
+                ),
+
+
               );
             },
           ),

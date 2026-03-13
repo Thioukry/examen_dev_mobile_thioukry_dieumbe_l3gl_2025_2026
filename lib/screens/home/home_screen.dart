@@ -34,18 +34,45 @@ final List<Widget> _pages = [
         backgroundColor: AppColors.primary,
         title: const Text("Sunu Task"),
         actions: [
-          IconButton(
-            icon: const Icon(Icons.notifications_none),
-            onPressed: () {},
-            // Bonus : Notifications
-          ),
-
+                Stack(
+                  alignment: Alignment.center,
+                  children: [
+                    IconButton(
+                      icon: const Icon(Icons.notifications_none),
+                      onPressed: () {
+                        // Action quand on clique sur la cloche
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          const SnackBar(content: Text("Vous n'avez pas de nouvelles notifications")),
+                        );
+                      },
+                    ),
+                    // Le petit point rouge (Notification Badge)
+                    Positioned(
+                      right: 12,
+                      top: 12,
+                      child: Container(
+                        padding: const EdgeInsets.all(2),
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(6),
+                        ),
+                        constraints: const BoxConstraints(minWidth: 12, minHeight: 12),
+                        child: const Text(
+                          '1', // Nombre de notifications factice
+                          style: TextStyle(color: Colors.white, fontSize: 8, fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,
+              ),
+    ),
+    ),
+              ],
+                ),
         ],
       ),
 
-      // Le Drawer (Menu latéral)
-      //drawer: const _HomeDrawer(),
 
+              // Affichage du page
+      // Le Drawer (Menu latéral)
+      //drawer: const _HomeDrawer
       // IndexedStack permet de garder les onglets "en vie" en mémoire
       body: _pages[_currentIndex],
       floatingActionButton: (_currentIndex == 0 || _currentIndex == 1)

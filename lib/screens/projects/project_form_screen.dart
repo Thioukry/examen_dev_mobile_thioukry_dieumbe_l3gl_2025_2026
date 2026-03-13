@@ -36,6 +36,27 @@ class _ProjectFormScreenState extends State<ProjectFormScreen> {
     _descriptionController.dispose();
     super.dispose();
   }
+  void save() {
+    final provider = Provider.of<ProjectProvider>(context, listen: false);
+
+    if (widget.project == null) {
+      // CRÉER
+      provider.createProject(Project(
+        id: const Uuid().v4(),
+        name: _nameController.text,
+        createdAt: DateTime.now(), userId: '', color:Colors.blue,
+      ));
+    } else {
+      // MODIFIER
+      final updatedProject = Project(
+        id: widget.project!.id, // On garde le même ID !
+        name: _nameController.text,
+        createdAt: widget.project!.createdAt, userId: '', color:widget.project!.color,
+      );
+      provider.updateProject(updatedProject);
+    }
+    Navigator.pop(context);
+  }
 
   Future<void> _saveProject() async {
     if (_formKey.currentState!.validate()) {

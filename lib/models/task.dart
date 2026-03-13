@@ -12,8 +12,13 @@ class Task {
   final TaskStatus status;
   final TaskPriority priority;
   final DateTime? dueDate;
+  bool isCompleted;
 
   var createdAt;
+
+
+
+
 
   Task({
     required this.id,
@@ -23,6 +28,7 @@ class Task {
     this.status = TaskStatus.todo,
     this.priority = TaskPriority.medium,
     this.dueDate, required createdAt,
+    this.isCompleted = false,
   });
 
   // Méthode pour copier une tâche en modifiant certains champs
