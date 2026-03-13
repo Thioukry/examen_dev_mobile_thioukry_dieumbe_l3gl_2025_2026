@@ -1,10 +1,11 @@
-gimport 'package:flutter/material.dart';
+import 'package:flutter/material.dart';
 import 'package:uuid/uuid.dart';
 import '../models/user.dart';
 import '../services/storage_service.dart';
 
 class AuthProvider extends ChangeNotifier {
-  final StorageService _storageService = StorageService.instance;
+  final StorageService
+  _storageService = StorageService.instance;
   final _uuid = const Uuid();
 
   User? _currentUser;
@@ -21,7 +22,7 @@ class AuthProvider extends ChangeNotifier {
   Future<void> init() async {
     _isLoading = true;
     // On ne notifie pas forcément ici pour éviter des rebuilds inutiles au splash
-    _currentUser = await _storageService.getCurrentuser();
+    _currentUser = await StorageService.getCurrentUser();
     _isLoading = false;
     notifyListeners();
   }
@@ -34,7 +35,7 @@ class AuthProvider extends ChangeNotifier {
 
     try {
       // 1. Récupérer tous les utilisateurs
-      final users = await _storageService.getAllUsers();
+      final users = await StorageService.getAllUsers();
 
       // 2. Chercher la correspondance
       final user = users.firstWhere(
@@ -44,7 +45,7 @@ class AuthProvider extends ChangeNotifier {
 
       // 3. Succès
       _currentUser = user;
-      await _storageService.saveCurrentUser(user);
+      await StorageService.saveCurrentUser(user);
       _isLoading = false;
       notifyListeners();
       return true;
@@ -63,7 +64,7 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
 
     try {
-      final users = await _storageService.getAllUsers();
+      final users = await StorageService.getAllUsers();
 
       // Vérifier si l'email existe déjà
       if (users.any((u) => u.email == email)) {
@@ -80,8 +81,8 @@ class AuthProvider extends ChangeNotifier {
       );
 
       // Sauvegarde double : Liste globale + Session actuelle
-      await _storageService.saveUser(newUser);
-      await _storageService.saveCurrentUser(newUser);
+      await StorageService.saveUser(newUser);
+      await StorageService.saveCurrentUser(newUser);
 
       _currentUser = newUser;
       _isLoading = false;
@@ -96,7 +97,7 @@ class AuthProvider extends ChangeNotifier {
   }
 
   Future<void> logout() async {
-    await _storageService.removeCurrentUser;
+    await StorageService.removeCurrentUser;
     _currentUser = null;
     notifyListeners();
   }

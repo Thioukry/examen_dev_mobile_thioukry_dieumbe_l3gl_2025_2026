@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sunu_task/providers/app_provider.dart';
 import 'package:sunu_task/core/constants/app_colors.dart';
 import 'package:sunu_task/core/constants/app_strings.dart';
 import 'package:sunu_task/models/onboardingItem.dart';
@@ -62,7 +63,7 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
   }
 
   Future<void> _completeOnboarding() async{
-    await StorageService.instance.setOnboardingComplete(true);
+    await StorageService.setOnboardingComplete(true);
     
     if(mounted){
       Navigator.pushReplacement(

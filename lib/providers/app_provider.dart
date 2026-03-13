@@ -25,7 +25,7 @@ class AppProvider extends ChangeNotifier {
 
   Future<void> completeOnboarding() async {
     _isOnboardingComplete = true;
-   // await _storageService.setOnboardingComplete();
+   //await _storageService.instance.setOnboardingComplete(true);
     notifyListeners();
   }
 
